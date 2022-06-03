@@ -101,13 +101,13 @@ const CommentWidget = props => {
           onSaveAndClose={props.onSaveAndClose} />
       )}
 
-      { !props.readOnly && props.annotation &&
+      { !props.readOnly && props.annotation && comments.length < 1 &&
         <div className="r6o-widget comment editable">
           <TextEntryField
             focus={props.focus}
             content={draftReply.value}
             editable={true}
-            placeholder={comments.length > 0 ? i18n.t('Add a reply...') : i18n.t('Add a comment...')}
+            placeholder={i18n.t('Add a comment...')}
             onChange={onEditReply}
             onSaveAndClose={() => props.onSaveAndClose()}
           /> 
