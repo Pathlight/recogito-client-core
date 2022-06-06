@@ -3,7 +3,7 @@
  */
 let serverTimeDifference = 0;
 
-export default () => ({
+export default (config) => ({
   
   /**
    * A generic container for RecogitoJS/Annotorious 
@@ -11,33 +11,33 @@ export default () => ({
    * most important piece of information is user auth 
    * info. Example:
    *
-   * user: { id, displayName, email, avatarURL }
+   * user: { id, name, email, photo_url }
    * 
    * id ........... the host application user ID (should be a URI, but could be username) REQUIRED
-   * displayName .. screen display or nickname OPTIONAL (id is used when empty)
-   * email ........ OPTIONAL
-   * avatarURL .... OPTIONAL + not supported at the moment
+   * name .. screen display or nickname OPTIONAL (id is used when empty)
+   * photo_url .... person's photo url
    */
+  user: config?.user ? (({id, name, photo_url}) => ({id, name, photo_url}))(config.user) : null,
 
-   /**
+  /**
     * Sets a server time, so we can correct browser time error. 
     * Note for the super-picky: client-server latency will introduce
     * an error we don't account for.
     */
-   setServerTime: serverNow => {
+  setServerTime: serverNow => {
     const browserNow = Date.now()
     serverTimeDifference = serverNow - browserNow;
-   },
-   
-   /** 
+  },
+
+  /** 
     * Returns the current 'server time', i.e. browser time 
     * adjusted by the serverTimeDifference value.
     */
-   getCurrentTimeAdjusted: () =>
-     (new Date(Date.now() + serverTimeDifference)).toISOString(),
+  getCurrentTimeAdjusted: () =>
+    (new Date(Date.now() + serverTimeDifference)).toISOString(),
 
-   /** Re-adjusts the given server timestamp to browser time **/
-   toClientTime: serverTime =>
-     Date.parse(serverTime) - serverTimeDifference
+  /** Re-adjusts the given server timestamp to browser time **/
+  toClientTime: serverTime =>
+    Date.parse(serverTime) - serverTimeDifference
 
 })
