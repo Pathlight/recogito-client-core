@@ -3,7 +3,7 @@
  */
 let serverTimeDifference = 0;
 
-export default (config) => ({
+export default () => ({
   
   /**
    * A generic container for RecogitoJS/Annotorious 
@@ -17,7 +17,6 @@ export default (config) => ({
    * name .. screen display or nickname OPTIONAL (id is used when empty)
    * photo_url .... person's photo url
    */
-  user: config?.user ? (({id, name, photo_url}) => ({id, name, photo_url}))(config.user) : null,
 
   /**
     * Sets a server time, so we can correct browser time error. 
