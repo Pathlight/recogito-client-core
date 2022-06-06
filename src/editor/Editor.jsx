@@ -111,7 +111,7 @@ export default class Editor extends Component {
     if (user) {
       meta.creator = {};
       if (user.id) meta.creator.id = user.id;
-      if (user.displayName) meta.creator.name = user.displayName;
+      if (user.name) meta.creator.name = user.name;
 
       meta[body.created ? 'modified' : 'created'] = this.props.env.getCurrentTimeAdjusted();
     }
@@ -302,7 +302,8 @@ export default class Editor extends Component {
       w.type.disableDelete(currentAnnotation, {
         ...w.props,
         readOnly:this.props.readOnly,
-        env: this.props.env
+        env: this.props.env,
+        editable: this.props.config.editable
       }) : false;
 
     const hasDelete = currentAnnotation && 
@@ -324,7 +325,8 @@ export default class Editor extends Component {
           <div className="r6o-editor-inner">
             {widgets.map((widget, idx) => 
               React.cloneElement(widget, { 
-                key: `${idx}`,
+                ...this.props.config,
+                key: `widget-${idx}`,
                 focus: idx === 0,
                 annotation : currentAnnotation,
                 readOnly : this.props.readOnly,
@@ -335,7 +337,7 @@ export default class Editor extends Component {
                 onUpsertBody: this.onUpsertBody,
                 onBatchModify: this.onBatchModify,
                 onSetProperty: this.onSetProperty,
-                onSaveAndClose: this.onOk              
+                onSaveAndClose: this.onOk
               })
             )}
             
