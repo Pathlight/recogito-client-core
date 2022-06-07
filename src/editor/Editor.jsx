@@ -298,20 +298,26 @@ export default class Editor extends Component {
     const widgets = this.props.widgets ? 
       this.props.widgets.map(getWidget) : DEFAULT_WIDGETS;
 
-    const isReadOnlyWidget = w => w.type.disableDelete ?
-      w.type.disableDelete(currentAnnotation, {
-        ...w.props,
-        readOnly:this.props.readOnly,
-        env: this.props.env,
-        editable: this.props.config.editable
-      }) : false;
+    const isReadOnlyWidget = w => {
+      if (!currentAnnotation.creator?.id) {
+        // Disable the widget if there isn't a creator with an id
+        w.props.disabled = true
+        return true
+      } else if (currentAnnotation.creator.id !== this.props.config.user.id) {
+        // Disable the widget if the creator is different than the user
+        w.props.disabled = true
+        return true
+      }
+      w.props.disabled = false
+      return false
+    };
 
     const hasDelete = currentAnnotation && 
       // annotation has bodies or allowEmpty,
       (currentAnnotation.bodies.length > 0 || this.props.allowEmpty) && // AND
       !this.props.readOnly && // we are not in read-only mode AND
       !currentAnnotation.isSelection && // this is not a selection AND
-      !widgets.some(isReadOnlyWidget);  // every widget is deletable
+      !widgets.map(isReadOnlyWidget).some(isReadOnly => isReadOnly === true);  // every widget is deletable
 
     return (
       <Draggable 

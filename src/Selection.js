@@ -9,8 +9,9 @@ import equals from 'fast-deep-equal';
  */
 export default class Selection {
 
-  constructor(target, body) {
+  constructor(creator, target, body) {
     this.underlying = {
+      creator,
       type: 'Selection',
       body: body || [],
       target
@@ -31,6 +32,10 @@ export default class Selection {
 
   get type() {
     return this.underlying.type;
+  }
+
+  get creator() {
+    return this.underlying.creator;
   }
 
   get body() {
