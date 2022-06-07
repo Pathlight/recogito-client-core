@@ -299,12 +299,11 @@ export default class Editor extends Component {
       this.props.widgets.map(getWidget) : DEFAULT_WIDGETS;
 
     const isReadOnlyWidget = w => {
-      const {underlying} = currentAnnotation
-      if (!underlying.creator?.id) {
+      if (!currentAnnotation.creator?.id) {
         // Disable the widget if there isn't a creator with an id
         w.props.disabled = true
         return true
-      } else if (underlying.creator.id !== this.props.config.user.id) {
+      } else if (currentAnnotation.creator.id !== this.props.config.user.id) {
         // Disable the widget if the creator is different than the user
         w.props.disabled = true
         return true
