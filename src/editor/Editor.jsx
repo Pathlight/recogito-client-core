@@ -323,8 +323,11 @@ export default class Editor extends Component {
         <div ref={this.element} className={this.state.dragged ? 'r6o-editor dragged' : 'r6o-editor'}>
           <div className="r6o-arrow" />
           <div className="r6o-editor-inner">
-            {widgets.map((widget, idx) => 
-              React.cloneElement(widget, { 
+          {widgets.map((widget, idx) =>
+            <div className="widget">
+              {widget.props.config?.inputLabel && 
+                <Label labelName={widget.props.config.inputLabel}/>}
+              {React.cloneElement(widget, { 
                 ...this.props.config,
                 key: `widget-${idx}`,
                 focus: idx === 0,
@@ -338,36 +341,36 @@ export default class Editor extends Component {
                 onBatchModify: this.onBatchModify,
                 onSetProperty: this.onSetProperty,
                 onSaveAndClose: this.onOk
-              })
-            )}
-            
-            { this.props.readOnly ? (
-              <div className="r6o-footer">
-                <button
-                  className="r6o-btn" 
-                  onClick={this.onCancel}>{i18n.t('Close')}</button>
-              </div>
-            ) : (
-              <div 
-                className={this.props.detachable ? "r6o-footer r6o-draggable" : "r6o-footer"}>
-                { hasDelete && (
-                  <button 
-                    className="r6o-btn left delete-annotation" 
-                    title={i18n.t('Delete')}
-                    onClick={this.onDelete}>
-                    <TrashIcon width={12} />
-                  </button>
-                )}
-
+              })}
+            </div>
+          )}
+          { this.props.readOnly ? (
+            <div className="r6o-footer">
+              <button
+                className="r6o-btn" 
+                onClick={this.onCancel}>{i18n.t('Close')}</button>
+            </div>
+          ) : (
+            <div 
+              className={this.props.detachable ? "r6o-footer r6o-draggable" : "r6o-footer"}>
+              { hasDelete && (
                 <button 
-                  className="r6o-btn outline"
-                  onClick={this.onCancel}>{i18n.t('Cancel')}</button>
+                  className="r6o-btn left delete-annotation" 
+                  title={i18n.t('Delete')}
+                  onClick={this.onDelete}>
+                  <TrashIcon width={12} />
+                </button>
+              )}
 
-                <button 
-                  className="r6o-btn "
-                  onClick={this.onOk}>{i18n.t('Ok')}</button>
-              </div>
-            )}
+              <button 
+                className="r6o-btn outline"
+                onClick={this.onCancel}>{i18n.t('Cancel')}</button>
+
+              <button 
+                className="r6o-btn "
+                onClick={this.onOk}>{i18n.t('Ok')}</button>
+            </div>
+          )}
           </div>
         </div>
 
