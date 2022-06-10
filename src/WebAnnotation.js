@@ -55,6 +55,10 @@ export default class WebAnnotation {
     return this.underlying.type;
   }
 
+  get creator() {
+    return this.underlying.creator;
+  }
+
   get motivation() {
     return this.underlying.motivation;
   }
