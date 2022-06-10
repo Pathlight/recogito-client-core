@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import { getWidget, DEFAULT_WIDGETS } from './widgets';
+import Label from './Label';
 import { TrashIcon } from '../Icons';
 import setPosition from './setPosition';
 import i18n from '../i18n';
