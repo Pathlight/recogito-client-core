@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CommentWidget from './comment/CommentWidget'
+import SelectWidget from './select/SelectWidget';
 import TagWidget from './tag/TagWidget';
 import WrappedWidget from './WrappedWidget';
 
@@ -15,7 +16,8 @@ window.ReactDOM = ReactDOM;
 /** Standard widgets included by default **/
 const BUILTIN_WIDGETS = {
   COMMENT: CommentWidget,
-  TAG: TagWidget
+  TAG: TagWidget,
+  SELECT: SelectWidget
 };
 
 /** Defaults to use if there's no overrides from the host app **/
