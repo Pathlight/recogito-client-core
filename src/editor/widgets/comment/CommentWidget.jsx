@@ -94,7 +94,7 @@ const CommentWidget = props => {
           key={idx} 
           env={props.env}
           purposeSelector={props.purposeSelector}
-          readOnly={isReadOnlyComment(body, props)} 
+          readOnly={props.disabled} 
           body={body} 
           onUpdate={props.onUpdateBody}
           onDelete={props.onRemoveBody}
