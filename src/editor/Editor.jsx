@@ -89,7 +89,8 @@ export default class Editor extends Component {
     if (window?.ResizeObserver) {
       const resizeObserver = new ResizeObserver(() => {
         if (!this.state.dragged)
-          setPosition(this.props.wrapperEl, this.element.current, this.props.selectedElement, autoPosition);
+          setPosition(this.props.wrapperEl, this.element.current, this.props.selectedElement, autoPosition,
+            this.props.allowOrientLeft);
       });
 
       resizeObserver.observe(this.props.wrapperEl);
@@ -97,7 +98,8 @@ export default class Editor extends Component {
     } else {
       // Fire setPosition manually *only* for devices that don't support ResizeObserver
       if (!this.state.dragged)
-        setPosition(this.props.wrapperEl, this.element.current, this.props.selectedElement, autoPosition);
+        setPosition(this.props.wrapperEl, this.element.current, this.props.selectedElement, autoPosition, 
+          this.props.allowOrientLeft);
     }  
   }
 
@@ -299,7 +301,7 @@ export default class Editor extends Component {
     const widgets = this.props.widgets ? 
       this.props.widgets.map(getWidget) : DEFAULT_WIDGETS;
 
-    const disabled = (() => {
+    const disabled = this.props.readOnly || (() => {
       if (!currentAnnotation.creator?.id) {
         // Disable all widgets if there isn't a creator with an id
         return true

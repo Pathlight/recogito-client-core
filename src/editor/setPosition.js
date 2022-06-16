@@ -1,7 +1,7 @@
 const MARGIN_VERTICAL = 14;
 
 /** Sets the editor position and determines a proper orientation **/
-const setPosition = (wrapperEl, editorEl, selectedEl, autoPosition) => {
+const setPosition = (wrapperEl, editorEl, selectedEl, autoPosition, allowOrientLeft) => {
   // Container element bounds
   const containerBounds = wrapperEl.getBoundingClientRect();
 
@@ -18,7 +18,7 @@ const setPosition = (wrapperEl, editorEl, selectedEl, autoPosition) => {
 
     // Test 1: does right edge extend beyond the width of the page?
     // If so, flip horizontally
-    if (defaultOrientation.right > window.innerWidth) {
+    if (allowOrientLeft && defaultOrientation.right > window.innerWidth) {
       editorEl.classList.remove('r6o-arrow-left');
       editorEl.classList.add('r6o-arrow-right');
       editorEl.style.left = `${right - defaultOrientation.width - containerBounds.left}px`;
