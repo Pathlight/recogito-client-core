@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select-rcc';
+import Select from 'react-select';
 
 export const PURPOSES = [
   {'value': 'assessing', 'label': 'Assessing'}, 
@@ -28,7 +28,7 @@ const PurposeSelect = props => {
         value={selectedOption}
         onChange={props.onChange}
         options={PURPOSES}
-        isDisabled={!props.editable}
+        disabled={!props.editable}
       />
     </div>
   );
