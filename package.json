@@ -38,7 +38,7 @@
     "node-polyglot": "^2.4.0",
     "react-autosize-textarea": "^7.1.0",
     "react-draggable": "^4.4.3",
-    "react-select-rcc": "1.0.0-rc.10",
+    "react-select": "1.0.0-rc.10",
     "react-transition-group": "^4.4.2",
     "regenerator-runtime": "^0.13.9",
     "timeago-react": "^3.0.2",

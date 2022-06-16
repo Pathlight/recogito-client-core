@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select-rcc';
+import Select from 'react-select';
 
 const CLASSIFYING = 'classifying'
 
