@@ -11,7 +11,7 @@ const SelectWidget = props => {
   // Use the context to determine which option to delete in the annotation.bodies
   // since we're using multiple SelectWidgets
   const {disabled, annotation, config} = props
-  const {options, context} = config
+  const {options, context, className} = config
   let {placeholder} = config
 
   const selectedOption = !annotation ? null : 
@@ -47,6 +47,7 @@ const SelectWidget = props => {
         placeholder={placeholder}
         disabled={disabled}
         clearable
+        className={className}
       />
   )
 
