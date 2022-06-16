@@ -45,8 +45,9 @@ const SelectWidget = props => {
         onChange={onChange}
         options={options}
         placeholder={placeholder}
-        isDisabled={disabled}
-        isClearable
+        disabled={disabled}
+        clearable
+        className={'r6o-select'}
       />
   )
 

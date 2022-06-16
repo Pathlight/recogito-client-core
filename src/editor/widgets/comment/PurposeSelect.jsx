@@ -22,16 +22,7 @@ const PurposeSelect = props => {
   const selectedOption = props.content ?
     PURPOSES.find(p => p.value === props.content) : null;
 
-  return (
-    <div className="r6o-purposedropdown">
-      <Select
-        value={selectedOption}
-        onChange={props.onChange}
-        options={PURPOSES}
-        isDisabled={!props.editable}
-      />
-    </div>
-  );
+  return null;
 
 }
 
