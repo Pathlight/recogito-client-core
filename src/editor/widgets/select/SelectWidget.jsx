@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select-rcc';
+import Select from 'react-select';
 
 const CLASSIFYING = 'classifying'
 
@@ -45,8 +45,8 @@ const SelectWidget = props => {
         onChange={onChange}
         options={options}
         placeholder={placeholder}
-        isDisabled={disabled}
-        isClearable
+        disabled={disabled}
+        clearable
       />
   )
 
