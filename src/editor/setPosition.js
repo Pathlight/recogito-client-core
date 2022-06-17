@@ -21,7 +21,15 @@ const setPosition = (wrapperEl, editorEl, selectedEl, autoPosition, allowOrientL
     if (allowOrientLeft && defaultOrientation.right > window.innerWidth) {
       editorEl.classList.remove('r6o-arrow-left');
       editorEl.classList.add('r6o-arrow-right');
-      editorEl.style.left = `${right - defaultOrientation.width - containerBounds.left}px`;
+      const offsetPosition = right - defaultOrientation.width - containerBounds.left
+      // Orient the editor s.t the left doesn't clip beyond the counterBounds
+      const position = Math.max(offsetPosition, 0)
+      editorEl.style.left = `${position}px`;
+      // Readjust the arrow node position by the difference of the offsetPosition and 0
+      const arrowNode = editorEl.children[0]
+      if (offsetPosition < 0) {
+        arrowNode.style.right = `${Math.abs(offsetPosition)}px`
+      }
     }
 
     // Test 2: does the bottom edge extend beyond the height of the page?
